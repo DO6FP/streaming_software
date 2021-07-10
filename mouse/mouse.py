@@ -1,6 +1,7 @@
 # module to interface the 3D SpaceMouse
 
 import time
+import spacemouse
 
 def loop(camera):
   """
@@ -8,9 +9,9 @@ def loop(camera):
   :param camera: the camera object as defined in camera.py, used to control the PTZ camera.
   """
   
-  # The 3D SpaceMouse is enumerated as Human Interface Device (HID)
-  import hid
-  mouse = hid.device()
+  # get handle to space mouse
+  space_mouse = spacemouse.SpaceMouse()
   
   while True:
-    time.sleep(1)
+    print(space_mouse.control, space_mouse.is_left_button_pressed, space_mouse.is_right_button_pressed)
+    time.sleep(0.2)

@@ -27,7 +27,7 @@ if __name__ == "__main__":
     import web_interface
     
     # initialize camera
-    camera = camera.Camera()
+    camera = camera.Camera(ip_address=globals.ptz_camera_ip_address)
     camera.command("debug")
     
     # start main loop for mouse in separate thread
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     video.debug()
     
     # initialize web interface
-    
+    web_interface.main_loop()
     print("main.py ended at {}".format(time.strftime("%d.%m.%Y %H:%M:%S")))
     
   except:

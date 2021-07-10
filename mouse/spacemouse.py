@@ -29,7 +29,7 @@ import numpy as np
 try:
   import hid
 except ModuleNotFoundError as exc:
-  raise ImportError("Unable to load module hid, required to interface with SpaceMouse. ") from exc
+  raise ImportError("Unable to load module hid, required to interface with SpaceMouse. You need root privileges.") from exc
 
 def to_int16(y1, y2):
   """
