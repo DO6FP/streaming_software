@@ -177,4 +177,4 @@ if __name__ == "__main__":
   space_mouse = SpaceMouse()
   for i in range(100000):
     print(space_mouse.control, space_mouse.is_left_button_pressed, space_mouse.is_right_button_pressed)
-    time.sleep(0.02)
+    time.sleep(0.2)

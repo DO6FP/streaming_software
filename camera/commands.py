@@ -9,7 +9,7 @@ def zoom_direct(args):
 
 def zoom_direct_speed(args):
   f = args[0]
-  speed = args[1]
+  speed = (int)(args[1]*7)
   b = int.to_bytes((int)(f*16384), length=2, byteorder='big')
   return bytearray.fromhex('81 01 04 47 0{} 0{} 0{} 0{} 0{} FF'.format(b.hex()[0], b.hex()[1], b.hex()[2], b.hex()[3], speed))
 
@@ -128,6 +128,12 @@ def get_xy_position(data):
     y_pos = -(y_int - 0xED40) / (0xFFFF - 0xED40)
     
   return (x_pos, y_pos)
+
+def tally(args):
+  if args[0]:
+    return bytearray.fromhex('81 01 7E 01 0A 00 02 FF')
+  else:    
+    return bytearray.fromhex('81 01 7E 01 0A 00 03 FF')
 
 commands = {
   # VISCA inquiries
@@ -251,5 +257,16 @@ commands = {
     "command_packet": lambda *args: bytearray.fromhex('81 01 06 05 FF')
   },
   
-  
+  # Tally mode
+  # Pan-tiltDrive_Reset
+  "Tally_Mode": {
+    "message_type": MessageType.VISCA_COMMAND,
+    "command_packet": lambda *args: bytearray.fromhex('81 01 7E 01 0A 01 04 FF')
+  },    
+    
+ # TallyOn 
+  "Tally": {
+    "message_type": MessageType.VISCA_COMMAND,
+    "command_packet": tally,
+  },
 }
